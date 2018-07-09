@@ -1,0 +1,14 @@
+OAUTH_TOKEN:501226995-6HkwJdWqDtXOXkVq9QAeg4HO2rPiXJOm2cfjdjR8
+OAUTH_SECRET:5mZy4cnaKpACvzwbVy7TIwWW1FhpRSmiEsJytLYwzk8ZW
+CONSUMER_KEY:6XZb69YW73Wx5QziOOc6Iv99R
+CONSUMER_SECRET:GJZLLIEu8jN7t2Kp1m1GuYH1M3ThW46dS7kXXOxUjeHpNThIwL
+TWITTER_HANDLE:Ahmed45110
+ALREADY_FOLLOWED_FILE:already-followed.txt
+FOLLOWERS_FILE:followers.txt
+FOLLOWS_FILE:following.txt
+USERS_KEEP_FOLLOWING:abc,BBCWorld,Forbes,foxnews,nytimes,reuters,TheEconomist,time,washingtonpost,wsj
+#USERS_KEEP_FOLLOWING:BBCWorld,cnni,nytimes,vice,guardian,ChinaDailyUSA,MailOnline,epochtimes,washingtonpost,ABSCBNNews,economictimes,timesofindia,BuzzFeed,Forbes,foxnews,HuffPost,sciencedirect,businessinsider,RT_com,BreitbartNews,usatoday,ndtv,bloomberg,el_pais,Independent,NPR,cnbc,Telegraph,wsj,reuters,_drudgereport_,time,daily_express,SPIEGELONLINE,thebalance,CBSNews,nypost,inquirerdotnet,thehill,thesun,NBCNews,TheAtlantic,usnews,latimes,SputnikInt,CBCNews,NHKWORLD_News,abc,harvard,voxdotcom,politico,newscomauHQ,DailyMirror,people,indianexpress,thedailybeast,marketwatch,thoughtcocom,abcnews,dwnews,DailyCaller,bustle,deadspin,Newsweek,sfgate,JSTOR_Daily,JSTOR,The_Hindu,newyorker,slate,liveleak,metrouk,thr,Change,firstpost,NYDailyNews,SkyNews,Oneindia,vulture,rapplerdotcom,indiatoday,dawn_com,RollingStone,FarsNews_Agency,NewsHour,zeitonline,ft,chicagotribune,Cosmopolitan,htTweets,NYMag,FortuneMagazine,TheEconomist,esquire,daily_star,euronews,ajenglish,Tasnimnews_en,msnbc,AlArabiya_Eng
+USERS_KEEP_UNMUTED:
+USERS_KEEP_MUTED:
+FOLLOW_BACKOFF_MIN_SECONDS:10
+FOLLOW_BACKOFF_MAX_SECONDS:60
