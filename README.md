@@ -9,10 +9,14 @@ QCRI Live New Demonstration is an internship project that aims to provide the us
 1. Requirements:
 	
 	a. Web Server
+
 	b. Php
+
 	c. MySQL
+
 	d. Python3+
-		Packages: [Twitter](https://pypi.org/project/twitter/), [newspaper](https://github.com/codelucas/newspaper), [tweepy](http://tweepy.readthedocs.io/en/v3.5.0/), MySQLdb, reosette-api and json
+
+	Packages: [Twitter](https://pypi.org/project/twitter/), [newspaper](https://github.com/codelucas/newspaper), [tweepy](http://tweepy.readthedocs.io/en/v3.5.0/), MySQLdb, reosette-api and json
 
 		`pip install twitter newspaper3k mysqlclient reosette-api json`
 
@@ -25,7 +29,7 @@ QCRI Live New Demonstration is an internship project that aims to provide the us
 	Mac OS
 
 		`brew install mysql-connector-c`
-		
+
 	if that fails, try
 
 		`brew install mysql`
