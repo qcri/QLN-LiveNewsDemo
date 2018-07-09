@@ -19,9 +19,13 @@ QCRI Live New Demonstration is an internship project that aims to provide the us
 	Note: Some dependencies might have to be in place when running the above command. Some hints on how to install these on various platforms:
 
 	Ubuntu 14, Ubuntu 16, Debian 8.6 (jessie)
+
 		`sudo apt-get install python-pip python-dev libmysqlclient-dev`
+
 	Mac OS
+
 		`brew install mysql-connector-c`
+		
 	if that fails, try
 
 		`brew install mysql`
