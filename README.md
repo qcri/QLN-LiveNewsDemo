@@ -1,4 +1,4 @@
-### QCRI LiveNews Demo
+# QCRI LiveNews Demo
 
 ## About This Project:
 QCRI Live New Demonstration is an internship project that aims to provide the user with a platform to track and customize news of interest to the user in an effective manner.
