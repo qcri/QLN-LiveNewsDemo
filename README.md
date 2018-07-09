@@ -14,17 +14,17 @@ QCRI Live New Demonstration is an internship project that aims to provide the us
 	d. Python3+
 		Packages: [Twitter](https://pypi.org/project/twitter/), [newspaper](https://github.com/codelucas/newspaper), [tweepy](http://tweepy.readthedocs.io/en/v3.5.0/), MySQLdb, reosette-api and json
 
-			`pip install twitter newspaper3k mysqlclient reosette-api json`
+		`pip install twitter newspaper3k mysqlclient reosette-api json`
 
-		Note: Some dependencies might have to be in place when running the above command. Some hints on how to install these on various platforms:
+	Note: Some dependencies might have to be in place when running the above command. Some hints on how to install these on various platforms:
 
-		Ubuntu 14, Ubuntu 16, Debian 8.6 (jessie)
-			`sudo apt-get install python-pip python-dev libmysqlclient-dev`
-		Mac OS
-			`brew install mysql-connector-c`
-		if that fails, try
+	Ubuntu 14, Ubuntu 16, Debian 8.6 (jessie)
+		`sudo apt-get install python-pip python-dev libmysqlclient-dev`
+	Mac OS
+		`brew install mysql-connector-c`
+	if that fails, try
 
-			`brew install mysql`
+		`brew install mysql`
 
 2. Import Database
 
