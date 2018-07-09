@@ -32,8 +32,9 @@ QCRI Live New Demonstration is an internship project that aims to provide the us
 
 3. Run The fellow users script `run_followUsers.sh` in a screen
 	
-	screen -S run_FollowUsers
-	run_followUsers.sh
+	`screen -S run_FollowUsers
+	run_followUsers.sh`
+	Before running the script, make sure to update the [Twitter API](https://apps.twitter.com/) credentials and the DB connection details.
 
 4. Start the Web Server and go to `http://localhost/<path>/index.php`
 

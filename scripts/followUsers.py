@@ -20,7 +20,8 @@ from newspaper import Article
 
 
 # Connect to MySQL
-db=MySQLdb.connect(host="localhost",database="reactapp",user="root",password='QCRI123!',unix_socket='/var/run/mysqld/mysqld.sock', charset = 'utf8')
+# Update Connection details
+db=MySQLdb.connect(host="localhost",database="reactapp",user="<dbuser>",password='<dbpass>',unix_socket='/var/run/mysqld/mysqld.sock', charset = 'utf8')
 cursor=db.cursor()
 
 
