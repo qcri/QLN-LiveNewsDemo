@@ -218,7 +218,9 @@ def main():
                     if(twimag==''):
                         try:
                             twimag = tweet.__dict__['_json']['entities']['media'][0]['media_url']
+                            twimag = (twimag[:290]) if len(twimag) > 290 else twimag # Check the field length in the DB
                             twttle = tweet.__dict__['_json']['text']
+                            twttle = (twttle[:490]) if len(twttle) > 490 else twttle # Check the field length in the DB
                         except Exception as e:
                             #print("media0-URLS:",tweet.__dict__['_json'])
                             continue
@@ -251,7 +253,9 @@ def main():
                             if(twimag==''):
                                 try:
                                     twimag = tweet.__dict__['_json']['entities']['media'][0]['media_url']
+                                    twimag = (twimag[:290]) if len(twimag) > 290 else twimag # Check the field length in the DB
                                     twttle = tweet.__dict__['_json']['text']
+                                    twttle = (twttle[:490]) if len(twttle) > 490 else twttle # Check the field length in the DB
                                 except Exception as e:
                                     #print("media1-URLS:",tweet.__dict__['_json'])
                                     continue
