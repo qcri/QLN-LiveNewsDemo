@@ -134,7 +134,7 @@ def getArticle(link):
 #    if downloading:
     article1.parse()
     title = article1.title
-    propaganda_score = rand(0,1000)/1000;
+    propaganda_score = random.random();
     image = article1.top_image
     url = article1.url
     return (title, image, propaganda_score)
@@ -229,7 +229,7 @@ def main():
                     twttle = (twttle[:490]) if len(twttle) > 490 else twttle # Check the field length in the DB
                     print("1",username,tweet.__dict__['_json']['id'],tweet.__dict__['_json']['created_at'],twttle,twimag) #,tweet._json['text']
                     cursor.execute('''INSERT into tweets_'''+args.language+''' (tweet_id, date, tweet,screen_name,title,image,propaganda_score)
-                        values (%s, %s,%s,%s,%s,%s) ON DUPLICATE KEY UPDATE tweet=values(tweet) ''',
+                        values (%s, %s,%s,%s,%s,%s,%s) ON DUPLICATE KEY UPDATE tweet=values(tweet) ''',
                         (tweet.__dict__['_json']['id'], datetime.datetime.strptime(tweet.__dict__['_json']['created_at'],'%a %b %d %H:%M:%S %z %Y'),json.dumps(tweet._json).encode('utf-8'),username,twttle,twimag,pscore))
                     db.commit()
             if(len(tmpTweets)<2):
@@ -264,7 +264,7 @@ def main():
                             twttle = (twttle[:490]) if len(twttle) > 490 else twttle # Check the field length in the DB
                             print("2",username,tweet.__dict__['_json']['id'],tweet.__dict__['_json']['created_at'],twttle,twimag) #,tweet._json['text']
                             cursor.execute('''INSERT into tweets_'''+args.language+''' (tweet_id, date, tweet,screen_name,title,image,propaganda_score)
-                            values (%s,%s,%s,%s,%s,%s) ON DUPLICATE KEY UPDATE tweet=values(tweet) ''',
+                            values (%s,%s,%s,%s,%s,%s,%s) ON DUPLICATE KEY UPDATE tweet=values(tweet) ''',
                             (tweet.__dict__['_json']['id'], datetime.datetime.strptime(tweet.__dict__['_json']['created_at'],'%a %b %d %H:%M:%S %z %Y'),json.dumps(tweet._json).encode('utf-8'),username,twttle,twimag,pscore))
                             db.commit()
             except Exception:
