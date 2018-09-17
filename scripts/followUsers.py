@@ -218,15 +218,15 @@ def main():
                     if(twimag==''):
                         try:
                             twimag = tweet.__dict__['_json']['entities']['media'][0]['media_url']
-                            twimag = (twimag[:290]) if len(twimag) > 290 else twimag # Check the field length in the DB
                             twttle = tweet.__dict__['_json']['text']
-                            twttle = (twttle[:490]) if len(twttle) > 490 else twttle # Check the field length in the DB
                         except Exception as e:
                             #print("media0-URLS:",tweet.__dict__['_json'])
                             continue
 
                     #print("TW0",twimag,' Title:',twttle)
                     #exit(0)
+                    twimag = (twimag[:290]) if len(twimag) > 290 else twimag # Check the field length in the DB
+                    twttle = (twttle[:490]) if len(twttle) > 490 else twttle # Check the field length in the DB
                     print("1",username,tweet.__dict__['_json']['id'],tweet.__dict__['_json']['created_at'],twttle,twimag) #,tweet._json['text']
                     cursor.execute('''INSERT into tweets_'''+args.language+''' (tweet_id, date, tweet,screen_name,title,image)
                         values (%s, %s,%s,%s,%s,%s) ON DUPLICATE KEY UPDATE tweet=values(tweet) ''',
@@ -253,15 +253,15 @@ def main():
                             if(twimag==''):
                                 try:
                                     twimag = tweet.__dict__['_json']['entities']['media'][0]['media_url']
-                                    twimag = (twimag[:290]) if len(twimag) > 290 else twimag # Check the field length in the DB
                                     twttle = tweet.__dict__['_json']['text']
-                                    twttle = (twttle[:490]) if len(twttle) > 490 else twttle # Check the field length in the DB
                                 except Exception as e:
                                     #print("media1-URLS:",tweet.__dict__['_json'])
                                     continue
                             
                             #print("TW1",twimag,' Title:',twttle)
                             #exit(0)
+                            twimag = (twimag[:290]) if len(twimag) > 290 else twimag # Check the field length in the DB
+                            twttle = (twttle[:490]) if len(twttle) > 490 else twttle # Check the field length in the DB
                             print("2",username,tweet.__dict__['_json']['id'],tweet.__dict__['_json']['created_at'],twttle,twimag) #,tweet._json['text']
                             cursor.execute('''INSERT into tweets_'''+args.language+''' (tweet_id, date, tweet,screen_name,title,image)
                             values (%s,%s,%s,%s,%s,%s) ON DUPLICATE KEY UPDATE tweet=values(tweet) ''',
