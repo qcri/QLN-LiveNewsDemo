@@ -154,7 +154,20 @@
                             <tr>
                                 <?php 
                                 $cat= $row["Category"];
-                                
+                                $factscores = explode(" ", $row["fact_predictions"]);
+                                $factlabels = explode(" ","low mixed high");
+                                $biasscores = explode(" ",$row["bias_predictions"]);
+                                $biaslabels = explode(" ", "extreme-right right right-center center left-center left extreme-left");
+                                $factscores_chart_data="";
+                                for ($i = 0; $i < count($factscores); $i++)
+                                    $factscores_chart_data .= "{x: '".$factlabels[$i]."', y: ".$factscores[$i]."},";
+                                #$factscores_chart_data = "[".$factscores_chart_data."]";
+                                $biasscores_chart_data="";
+                                for ($i = 0; $i < count($biasscores); $i++)
+                                    $biasscores_chart_data .= "{x: '".$biaslabels[$i]."', y: ".$biasscores[$i]."},";
+                                #$biasscores_chart_data = "[".$biasscores_chart_data."]";
+
+                                //echo " Bias Score: ".$biasscores_chart_data."<br/>";
                                 if (strcmp($cat,'General')==0)
                                 {
                                     $gicon='fa fa-globe';
@@ -187,13 +200,13 @@
                             <tr>
                             <td>Factuality:
                             </td>
-                            <td><?php echo $row["Truthiness"]?>, <?php echo $row["is_factual"]?>
+                            <td><?php echo $row["Truthiness"]?>, <?php echo $row["is_factual"]?>  <div style='align:right;position:relative;width:500px;height:150px;' id='factchart'>
                             </td>
                             </tr>
                             <tr>
                             <td>Bias:
                             </td>
-                            <td><?php echo $row["bias"]?>
+                            <td><?php echo $row["bias"]?> <div style='position:relative;width:500px;height:250px;' id='biaschart'></div>
                             </td>
                             </tr>
                         </table>
@@ -297,8 +310,9 @@
                     height=95% width=95% frameborder="0" gesture="media"  allowfullscreen></iframe>
                 </div>
                 <div style="position:absolute;width:90vw;height:800vh;" id="menu4" class="tab-pane fade msize">
-                    
-                <h3>Sentiment Analysis</h3>
+                <div>
+                <img align="left" style="width: 55px; height:55px;" src="<?php echo $row["user_profile_image_url"]?>"><h3 class="heading"><?php echo $row["user_name"]?></h3>
+                </div>
                 <hr>
                 <?php
                 $t_name= $row["user_screen_name"];
@@ -357,6 +371,49 @@ return"function"==typeof this.options.hoverCallback&&(b=this.options.hoverCallba
         resize:true
     });
     
+    //var $arrColors = ['#34495E', '#26B99A',  '#666', '#3498DB',"#008080", "#800080", "#000800"];
+    var $arrColors = ['#461420', '#584738', '#859863', '#F0CE86', '#DD2D2C', '#18845F', '#72529D'];
+
+    var FactBar= Morris.Bar ({  
+        element: 'factchart',
+        data:[<?php echo $factscores_chart_data ?>],
+        xkey: 'x',
+        ykeys:['y'],
+        ymax:1,
+        labels:['y'],
+        barColors: function (row, series, type) {
+        return $arrColors[row.x];
+    },
+        hideHover:'auto',
+        xLabelMargin: 10,
+        horizontal:true,        
+        stacked: false,
+        gridTextColor: '#000',
+        gridTextSize: 15,
+        resize:true
+    });
+
+    
+
+    var BiasBar= Morris.Bar ({        
+        element: 'biaschart',
+        data:[<?php echo $biasscores_chart_data ?>],
+        xkey: 'x',
+        ykeys:['y'],
+        ymax:1,
+        labels:['y'],
+        barColors:  function (row, series, type) {
+        return $arrColors[row.x];
+    },//["#B21516", "#999999", "#1f7a1f", "#000080", "#008080", "#800080", "#000800"],
+        hideHover:'auto',
+        xLabelMargin: 10,
+        horizontal:true,        
+        stacked: false,
+        gridTextColor: '#000',
+        gridTextSize: 15,
+        resize:true
+    });
+    
 </script>
 <script>
 $('a[data-toggle="tab"]').on('shown.bs.tab', function(e) {
@@ -364,6 +421,8 @@ $('a[data-toggle="tab"]').on('shown.bs.tab', function(e) {
 
   switch (target) {
     case "#menu4":
+      FactBar.redraw();
+      BiasBar.redraw();
       homeBar.redraw();
       $(window).trigger('resize');
       break;
