@@ -138,7 +138,7 @@ def getArticle(link):
     propaganda_score = random.random()
     image = article1.top_image
     url = article1.url
-    return (title, image, propaganda_score)
+    return (title, image, propaganda_score,content)
 
 
 def limit_handled(cursor):
@@ -212,7 +212,7 @@ def main():
                     #print("In0 Tweet:",tweet.__dict__['_json']['entities'])
                     try:
                         twurl = tweet.__dict__['_json']['entities']['urls'][0]['expanded_url']
-                        (twttle,twimag,pscore) = getArticle(twurl)
+                        (twttle,twimag,pscore,content) = getArticle(twurl)
                     except Exception as e:
                         #print("urls0-URLS:",tweet.__dict__['_json'])
                         continue
@@ -247,7 +247,7 @@ def main():
                             #print("In1 Tweet:",tweet.__dict__['_json']['entities'])
                             try:
                                 twurl = tweet.__dict__['_json']['entities']['urls'][0]['expanded_url']
-                                (twttle,twimag,pscore) = getArticle(twurl)
+                                (twttle,twimag,pscore,content) = getArticle(twurl)
                             except Exception as e:
                                 #print("urls1-URLS:",tweet.__dict__['_json'])
                                 continue
