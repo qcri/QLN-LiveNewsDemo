@@ -10,12 +10,39 @@
    <head>
       <title>News Project</title>
       <meta charset="utf-8">
+      <meta http-equiv="refresh" content="180">
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
       <link rel="stylesheet" type="text/css" href="scroll.css">
       <link rel="stylesheet" type="text/css" href="navbar.css">
       <link rel="icon" type="image/png" href="favicon.gif">
+          <!--Load the AJAX API-->
+      <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+      <script type="text/javascript">
+            google.charts.load('current', {'packages':['gauge']});
+            google.charts.setOnLoadCallback(drawChart());
+
+            function drawChart(val, divid) {
+
+              var data = google.visualization.arrayToDataTable([
+                ['Label', 'Value'],
+                ['PScore', val*100],
+              ]);
+
+              var options = {
+                width: 200, height: 65,
+                redFrom: 80, redTo: 100,
+                yellowFrom:50, yellowTo: 80,
+                greenFrom:0, greenTo:50,
+                minorTicks: 5
+              };
+              var chart = new google.visualization.Gauge(document.getElementById(divid));
+              chart.draw(data, options);
+          }
+
+      </script>
+
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
       <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
@@ -587,8 +614,8 @@
             </div>
             <div class="panel-body">   
             <!-- call tweets file here --> 
-	    <?php 
-		include 'tweets_custom.php';  ?>          
+	          <?php include 'tweets_custom.php';  ?> 
+
             </div>
          </div>
       </div>

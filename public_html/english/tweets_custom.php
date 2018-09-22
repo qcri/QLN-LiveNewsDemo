@@ -34,6 +34,35 @@
 
 }
 
+.ranktable { 
+    border-spacing: 10px;
+    border-collapse: separate;
+}
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+}
+
 .tweet_time {
 
     font-size: 18px;
@@ -84,31 +113,7 @@
 }
 
 </style>
-    <!--Load the AJAX API-->
-   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-   <script type="text/javascript">
-      google.charts.load('current', {'packages':['gauge']});
-      google.charts.setOnLoadCallback(drawChart);
 
-      function drawChart(val, divid) {
-
-        var data = google.visualization.arrayToDataTable([
-          ['Label', 'Value'],
-          ['PScore', val*100],
-        ]);
-
-        var options = {
-          width: 200, height: 60,
-          redFrom: 80, redTo: 100,
-          yellowFrom:50, yellowTo: 80,
-          greenFrom:0, greenTo:50,
-          minorTicks: 5
-        };
-        var chart = new google.visualization.Gauge(document.getElementById(divid));
-        chart.draw(data, options);
-    }
-
-    </script>
 <!-- TWITTER USER PROFILE INFORMATION WILL BE HERE -->
 
 <?php
@@ -329,7 +334,7 @@ function time_elapsed_string($datetime,$present, $full = false)
 
                 echo "<p class='tweet_time'>$t_time &nbsp; ($tweet_time)</p>";
 
-                echo "<div><span id='$tweetid' name='$tweetid'>Here: <script>drawChart($pscore,'$tweetid');</script></span> &nbsp;<a href='#' onClick='MyWindow=window.open(\"callAPI.php\",\"MyWindow\",width=300,height=300); return false;'>ClaimRank</a></div>";
+                echo "<table class='ranktable'><tr><td><span id='$tweetid' name='$tweetid'  title=\"Propaganda Score\">PScore:$pscore<script>drawChart($pscore,'$tweetid');</script></span></td><td><a href='#'  title=\"QCRI Claim Rank\" onClick='MyWindow=window.open(\"callAPI.php\",\"MyWindow\",width=300,height=300); return false;'><img src='iconClaim.png' alt='ClaimRank' width='68px'></a></td></tr></table>";
 
                 echo "</div>"; //ended div_text
 
