@@ -271,6 +271,13 @@ function time_elapsed_string($datetime,$present, $full = false)
             }
 
             
+            if(strpos($tweet_url,'https://twitter.com') !== false){
+
+                $json_title = $tweet['text'];
+                $pos = strpos($json_title,'… https://t.co');
+                $json_title = substr($json_title, 0,$pos);
+
+            }
 
             
 
@@ -314,9 +321,9 @@ function time_elapsed_string($datetime,$present, $full = false)
 
                     echo "<h4 class='margin-top-4px'>";
 
-                    echo "<p class=\"tweet\">$json_title &nbsp;</p>";
+                    echo "<p class=\"tweet\">$json_title &nbsp;";
 
-                    echo "<a href='{$tweet_url}'>...</a> ";
+                    echo "<a href='{$tweet_url}'>...</a> </p>";
 
                     echo "</h4>";
 
@@ -356,6 +363,8 @@ function time_elapsed_string($datetime,$present, $full = false)
                 echo "<td align='center' style='padding: 5px 10px 5px 5px;'><span id='".$tweetid."b' name='".$tweetid."b'  title=\"Ideology: Left-Right Bias\">&nbsp;<script>drawBiasBarChart($biasscores[0],$biasscores[1],$biasscores[2],$biasscores[3],$biasscores[4],$biasscores[5],$biasscores[6],'".$tweetid."b');</script></span><br>Ideology: Left-Right Bias</td>";                
                 echo "</tr></table>";
                  
+
+                //echo "<div>Dump:".var_dump($tweet)."</div><br>";
 
                 echo "</div>"; //ended div_text
 
