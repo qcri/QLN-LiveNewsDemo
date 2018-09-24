@@ -352,8 +352,8 @@ function time_elapsed_string($datetime,$present, $full = false)
 
                 echo "<table class='ranktable' ><tr><td><span id='$tweetid' name='$tweetid'  title=\"Propaganda Score\">PScore:$pscore<script>drawChart($pscore,'$tweetid');</script></span><br>Propaganda</td>";
                 echo "<td align='center' style='padding: 5px 10px 5px 5px;'><a href='callAPI.php?tweetid=$tweetid'  title=\"QCRI Claim Rank\" onClick='MyWindow=window.open(\"claimrank.php?tweetid=$tweetid\",\"MyWindow\",width=300,height=300); return false;'><img src='iconClaim.png' alt='ClaimRank' width='80px'></a><br/><br/>Claim Rank</td>";
-                echo "<td  align='center' style='padding: 5px 10px 5px 5px;'><span id='$tweetid+1' name='$tweetid+1'  title=\"Factuality of reporting\">PScore:$pscore<script>drawFactBarChart($factscores[0],$factscores[1],$factscores[2],'$tweetid+1');</script></span><br>Factuality of Reporting</td>";
-                echo "<td align='center' style='padding: 5px 10px 5px 5px;'><span id='$tweetid+2' name='$tweetid+2'  title=\"Ideology: Left-Right Bias\">PScore:$pscore<script>drawBiasBarChart($biasscores[0],$biasscores[1],$biasscores[2],$biasscores[3],$biasscores[4],$biasscores[5],$biasscores[6],'$tweetid+2');</script></span><br>Ideology: Left-Right Bias</td>";                
+                echo "<td  align='center' style='padding: 5px 10px 5px 5px;'><span id='$tweetid+1' name='$tweetid+1'  title=\"Factuality of reporting\">&nbsp;<script>drawFactBarChart($factscores[0],$factscores[1],$factscores[2],'$tweetid+1');</script></span><br>Factuality of Reporting</td>";
+                echo "<td align='center' style='padding: 5px 10px 5px 5px;'><span id='$tweetid+2' name='$tweetid+2'  title=\"Ideology: Left-Right Bias\">&nbsp;<script>drawBiasBarChart($biasscores[0],$biasscores[1],$biasscores[2],$biasscores[3],$biasscores[4],$biasscores[5],$biasscores[6],'$tweetid+2');</script></span><br>Ideology: Left-Right Bias</td>";                
                 echo "</tr></table>";
                  
 
