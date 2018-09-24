@@ -34,6 +34,7 @@ function CallClaimRank($content) {
     if ($err) {
       echo "cURL Error #:" . $err;
     } else {
+      $resopnse  = str_replace("../static/images/graylogo.png", "http://claimrank.qcri.org/static/images/graylogo.png", $resopnse);
       echo $response;
     }
   }
