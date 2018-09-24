@@ -19,10 +19,12 @@
       <link rel="icon" type="image/png" href="favicon.gif">
           <!--Load the AJAX API-->
       <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
       <script type="text/javascript">
+
+            google.charts.load("current", {packages:['corechart']});
             google.charts.load('current', {'packages':['gauge']});
             google.charts.setOnLoadCallback(drawChart());
-
             function drawChart(val, divid) {
 
               var data = google.visualization.arrayToDataTable([
@@ -31,7 +33,7 @@
               ]);
 
               var options = {
-                width: 200, height: 65,
+                width: 210, height: 80,
                 redFrom: 80, redTo: 100,
                 yellowFrom:50, yellowTo: 80,
                 greenFrom:0, greenTo:50,
@@ -39,6 +41,53 @@
               };
               var chart = new google.visualization.Gauge(document.getElementById(divid));
               chart.draw(data, options);
+          }
+
+          google.charts.setOnLoadCallback(drawFactBarChart());
+          function drawFactBarChart(val1,val2,val3,divid) {
+              var chartdata=[["Ideology", "Value", { role: "style" } ],['extreme-right', val1, '#461420'],['right', val2, '#584738'],['right-center', val3, '#859863']];
+              var data = google.visualization.arrayToDataTable(chartdata);
+              var view = new google.visualization.DataView(data);
+              // view.setColumns([0, 1,
+              //                  { calc: "stringify",
+              //                    sourceColumn: 1,
+              //                    type: "string",
+              //                    role: "annotation" },
+              //                  2]);
+
+              var options = {
+                //title: "Density of Precious Metals, in g/cm^3",
+                width: 150,
+                height: 100,
+                bar: {groupWidth: "95%"},
+                legend: { position: "none" },
+              };
+              var chart = new google.visualization.ColumnChart(document.getElementById(divid));
+              chart.draw(view, options);
+          }
+
+          google.charts.setOnLoadCallback(drawBiasBarChart());
+          function drawBiasBarChart(val1,val2,val3,val4,val5,val6,val7,divid) {
+            var chartdata=[["Ideology", "Value", { role: "style" } ],['extreme-right', val1, '#461420'],['right', val2, '#584738'],['right-center', val3, '#859863'],['center', val4, '#F0CE86'],['left-center', val5, '#DD2D2C'],['left', val6, '#18845F'],['extreme-left', val7, '#72529D']];
+              var data = google.visualization.arrayToDataTable(chartdata);
+
+              var view = new google.visualization.DataView(data);
+              // view.setColumns([0, 1,
+              //                  { calc: "stringify",
+              //                    sourceColumn: 1,
+              //                    type: "string",
+              //                    role: "annotation" },
+              //                  2]);
+
+              var options = {
+                //title: "Density of Precious Metals, in g/cm^3",
+                width: 250,
+                height: 100,
+                bar: {groupWidth: "95%"},
+                legend: { position: "none" },
+              };
+              var chart = new google.visualization.ColumnChart(document.getElementById(divid));
+              chart.draw(view, options);
           }
 
       </script>

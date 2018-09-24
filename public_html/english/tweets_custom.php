@@ -36,6 +36,7 @@
 
 .ranktable { 
     border-spacing: 10px;
+    padding: 10px;
     border-collapse: separate;
 }
 
@@ -186,7 +187,7 @@ function time_elapsed_string($datetime,$present, $full = false)
 
     include 'dbconnection.php';
 
-    $sql="SELECT * FROM tweets_eng, eng_source_name WHERE eng_source_name.source_user_name = tweets_eng.screen_name ORDER BY tweets_eng.date DESC LIMIT 50";
+    $sql="SELECT * FROM tweets_eng, eng_source_name, news_english WHERE eng_source_name.source_user_name = tweets_eng.screen_name and eng_source_name.source_user_id=news_english.user_id ORDER BY tweets_eng.date DESC LIMIT 50";
 
     $result = mysqli_query($conn,$sql);
 
@@ -203,6 +204,21 @@ function time_elapsed_string($datetime,$present, $full = false)
             $json_title = $row['title'];
             $json_image = $row['image'];
             $pscore = $row['propaganda_score']; 
+
+            $arrColors = ['#461420', '#584738', '#859863', '#F0CE86', '#DD2D2C', '#18845F', '#72529D', '#72529D'];
+            $factscores = explode(" ", $row["fact_predictions"]);            
+            $factlabels = explode(" ","low mixed high");
+            $biasscores = explode(" ",$row["bias_predictions"]);
+            $biaslabels = explode(" ", "extreme-right right right-center center left-center left extreme-left");
+            $factscores_chart_data="";
+            for ($i = 0; $i < count($factscores); $i++)
+                $factscores_chart_data .= "['".$factlabels[$i]."', ".$factscores[$i].", '".$arrColors[$i]."'],";
+            $factscores_chart_data = "[ [\"Element\", \"Density\", { role: \"style\" } ],".$factscores_chart_data."]";
+            $biasscores_chart_data="";
+            for ($i = 0; $i < count($biasscores); $i++)
+                $biasscores_chart_data .= "['".$biaslabels[$i]."', ".$biasscores[$i].", '".$arrColors[$i]."'],";
+            $biasscores_chart_data = "[ [\"Element\", \"Density\", { role: \"style\" } ],".$biasscores_chart_data."]";
+
 
             // decode json format tweets
 
@@ -334,7 +350,12 @@ function time_elapsed_string($datetime,$present, $full = false)
 
                 echo "<p class='tweet_time'>$t_time &nbsp; ($tweet_time)</p>";
 
-                echo "<table class='ranktable'><tr><td><span id='$tweetid' name='$tweetid'  title=\"Propaganda Score\">PScore:$pscore<script>drawChart($pscore,'$tweetid');</script></span></td><td><a href='#'  title=\"QCRI Claim Rank\" onClick='MyWindow=window.open(\"callAPI.php\",\"MyWindow\",width=300,height=300); return false;'><img src='iconClaim.png' alt='ClaimRank' width='68px'></a></td></tr></table>";
+                echo "<table class='ranktable' ><tr><td><span id='$tweetid' name='$tweetid'  title=\"Propaganda Score\">PScore:$pscore<script>drawChart($pscore,'$tweetid');</script></span><br>Propaganda</td>";
+                echo "<td align='center' style='padding: 5px 10px 5px 5px;'><a href='#'  title=\"QCRI Claim Rank\" onClick='MyWindow=window.open(\"callAPI.php\",\"MyWindow\",width=300,height=300); return false;'><img src='iconClaim.png' alt='ClaimRank' width='80px'></a><br/><br/>Claim Rank</td>";
+                echo "<td  align='center' style='padding: 5px 10px 5px 5px;'><span id='$tweetid+1' name='$tweetid+1'  title=\"Factuality of reporting\">PScore:$pscore<script>drawFactBarChart($factscores[0],$factscores[1],$factscores[2],'$tweetid+1');</script></span><br>Factuality of Reporting</td>";
+                echo "<td align='center' style='padding: 5px 10px 5px 5px;'><span id='$tweetid+2' name='$tweetid+2'  title=\"Ideology: Left-Right Bias\">PScore:$pscore<script>drawBiasBarChart($biasscores[0],$biasscores[1],$biasscores[2],$biasscores[3],$biasscores[4],$biasscores[5],$biasscores[6],'$tweetid+2');</script></span><br>Ideology: Left-Right Bias</td>";                
+                echo "</tr></table>";
+                 
 
                 echo "</div>"; //ended div_text
 
@@ -386,12 +407,20 @@ function time_elapsed_string($datetime,$present, $full = false)
 
     ?>
 
+
+
     <script>
 // When the user clicks on div, open the popup
 function myFunction() {
     var popup = document.getElementById("myPopup");
     popup.classList.toggle("show");
 }
+
+//google.charts.setOnLoadCallback(drawChart);
+
+//google.charts.setOnLoadCallback(drawFactBarChart);
+google.charts.setOnLoadCallback(drawBiasBarChart());
+google.charts.setOnLoadCallback(drawChart0());
 </script>
 
     <?php
