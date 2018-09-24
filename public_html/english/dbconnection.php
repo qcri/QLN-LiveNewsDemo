@@ -1,7 +1,7 @@
 <?php
 $servername = "localhost";
-$username = "root";
-$password = "QCRI123!";
+$username = "demouser1";
+$password = "76wxaGNUlaOT7fl2";
 $dbname = "reactapp";
 
 // Create connection

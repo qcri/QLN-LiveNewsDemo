@@ -21,7 +21,7 @@ from newspaper import Article
 
 # Connect to MySQL
 # Update Connection details
-db=MySQLdb.connect(host="localhost",database="reactapp",user="<dbuser>",password='<dbpass>',unix_socket='/var/run/mysqld/mysqld.sock', charset = 'utf8')
+db=MySQLdb.connect(host="localhost",database="reactapp",user="root",password='QCRI123!',unix_socket='/var/run/mysqld/mysqld.sock', charset = 'utf8')
 cursor=db.cursor()
 
 
@@ -228,6 +228,7 @@ def main():
                     #exit(0)
                     twimag = (twimag[:290]) if len(twimag) > 290 else twimag # Check the field length in the DB
                     twttle = (twttle[:490]) if len(twttle) > 490 else twttle # Check the field length in the DB
+                    content = (content[:7900]) if len(content) > 7900 else content # fix length 
                     print("1",username,tweet.__dict__['_json']['id'],tweet.__dict__['_json']['created_at'],twttle,twimag,pscore) #,tweet._json['text']
                     cursor.execute('''INSERT into tweets_'''+args.language+''' (tweet_id, date, tweet,screen_name,title,image,propaganda_score,article)
                         values (%s, %s,%s,%s,%s,%s,%s,%s) ON DUPLICATE KEY UPDATE tweet=values(tweet) ''',
@@ -263,6 +264,7 @@ def main():
                             #exit(0)
                             twimag = (twimag[:290]) if len(twimag) > 290 else twimag # Check the field length in the DB
                             twttle = (twttle[:490]) if len(twttle) > 490 else twttle # Check the field length in the DB
+                            content = (content[:7900]) if len(content) > 7900 else content # fix length 
                             print("2",username,tweet.__dict__['_json']['id'],tweet.__dict__['_json']['created_at'],twttle,twimag,pscore) #,tweet._json['text']
                             cursor.execute('''INSERT into tweets_'''+args.language+''' (tweet_id, date, tweet,screen_name,title,image,propaganda_score,article)
                             values (%s,%s,%s,%s,%s,%s,%s,%s) ON DUPLICATE KEY UPDATE tweet=values(tweet) ''',

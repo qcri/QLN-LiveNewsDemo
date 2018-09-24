@@ -7,7 +7,8 @@ ALREADY_FOLLOWED_FILE:already-followed.txt
 FOLLOWERS_FILE:followers.txt
 FOLLOWS_FILE:following.txt
 USERS_KEEP_UNMUTED:
-USERS_KEEP_FOLLOWING:AJArabic,cnnarabic,France24_ar
+#USERS_KEEP_FOLLOWING:AJArabic,cnnarabic,France24_ar
+USERS_KEEP_FOLLOWING:aletihadae
 #USERS_KEEP_FOLLOWING:AlArabiya_Brk,AlArabiya,AJArabic,sabqorg,SaudiNews50,cnnarabic,HashKSA,realmadridarab,France24_ar,mbc1,youm7,AjelNews24,AlHadath,BBCArabic,mbc2,AlRiyadh,AlAhram,AlArabiya_spt,spagov,TheArabHash,Cityarabia,skynewsarabia,mbcmax,Ruh_Rd,beINSPORTS_MENA,Shorouk_News,CBCEgypt,RTarabic,ajmubasher,SkyNewsArabia_B,KSASociety,mbc4,ShahidVOD,ONENT,TahrirNews,ActionYaDawry,aawsat_News,AlMasryAlYoum,aleqtisadiah,AlAhly,techwd,News_Brk24,NileFM,fifacom_ar,Bey2ollak,alsumariatv,mbcdrama,AlArabiya_Iraq,sadaalmalaeb,ElwatanNews,BarcelonaAR,RassdNewsN,naizaktv,JeddahNow,mbcthevoice,ajlnews,DMedicalinfo,alhurranews,AlArabiya_Bn,AJABreaking,ReNgo_Sport,emaratalyoum,WatanNews,DXBMediaOffice,JeddahAmanah,SAYA_Show,Akhbaar24,hadath24_,UAE_BARQ,hilalstuff,AlhurraIraq,AlwatanSA,alShrqNews,bbcarabicalerts,SaudiMCI,hespress,korarotana,shabab6april,MLSD_SA,alweeamnews,SuGaRx_WoRLD,News_Sa24,Masrawy
 USERS_KEEP_MUTED:
 FOLLOW_BACKOFF_MIN_SECONDS:10
