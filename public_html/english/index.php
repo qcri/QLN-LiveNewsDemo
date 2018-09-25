@@ -45,7 +45,7 @@
 
           google.charts.setOnLoadCallback(drawFactBarChart());
           function drawFactBarChart(val1,val2,val3,divid) {
-              var chartdata=[["Ideology", "Value", { role: "style" } ],['extreme-right', val1, '#461420'],['right', val2, '#584738'],['right-center', val3, '#859863']];
+              var chartdata=[["Ideology", "Value", { role: "style" } ],['low', val1, '#461420'],['mixed', val2, '#584738'],['high', val3, '#859863']];
               var data = google.visualization.arrayToDataTable(chartdata);
               var view = new google.visualization.DataView(data);
               // view.setColumns([0, 1,
