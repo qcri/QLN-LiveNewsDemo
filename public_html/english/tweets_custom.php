@@ -244,8 +244,8 @@ function time_elapsed_string($datetime,$present, $full = false)
 
             // make links clickable
 
-            $tweet_text=preg_replace('@(https?://([-\w\.]+)+(/([\w/_\.]*(\?\S+)?(#\S+)?)?)?)@', '<a href="$1" target="_blank">... &nbsp;</a>', $tweet_text);
-
+            #$tweet_text=preg_replace('@(https?://([-\w\.]+)+(/([\w/_\.]*(\?\S+)?(#\S+)?)?)?)@', '<a href="$1" target="_blank">... &nbsp;</a>', $tweet_text);
+            $tweet_text=preg_replace('@(https?://([-\w\.]+)+(/([\w/_\.]*(\?\S+)?(#\S+)?)?)?)@', '', $tweet_text);
             
 
             if (array_key_exists('urls', $tweet['entities']))
@@ -284,7 +284,6 @@ function time_elapsed_string($datetime,$present, $full = false)
             //$tweet_text=preg_replace('@(https?://([-\w\.]+)+(/([\w/_\.]*(\?\S+)?(#\S+)?)?)?)@', ' ', $tweet_text );
 
                                                     
-
             // filter out the retweets                      
 
             if(preg_match('/^RT/', $tweet_text) == 0)
@@ -315,7 +314,7 @@ function time_elapsed_string($datetime,$present, $full = false)
 
                 // output
 
-                if($json_title != NULL)
+                if($json_title != NULL and strlen($json_title)>strlen($tweet_text))
 
                 {
 
@@ -335,7 +334,7 @@ function time_elapsed_string($datetime,$present, $full = false)
 
                     echo "<h4 class='margin-top-4px'>";
 
-                    echo "<p class=\"tweet\">From tweet: $tweet_text</p>";
+                    echo "<p class=\"tweet\"><a href='{$tweet_url}'>$tweet_text</a></p>";
 
                     echo "</h4>";
 
