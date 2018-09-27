@@ -244,8 +244,8 @@ function time_elapsed_string($datetime,$present, $full = false)
 
             // make links clickable
 
-            $tweet_text=preg_replace('@(https?://([-\w\.]+)+(/([\w/_\.]*(\?\S+)?(#\S+)?)?)?)@', '<a href="$1" target="_blank">... &nbsp;</a>', $tweet_text);
-
+            #$tweet_text=preg_replace('@(https?://([-\w\.]+)+(/([\w/_\.]*(\?\S+)?(#\S+)?)?)?)@', '<a href="$1" target="_blank">... &nbsp;</a>', $tweet_text);
+            $tweet_text=preg_replace('@(https?://([-\w\.]+)+(/([\w/_\.]*(\?\S+)?(#\S+)?)?)?)@', '', $tweet_text);
             
 
             if (array_key_exists('urls', $tweet['entities']))
@@ -271,13 +271,19 @@ function time_elapsed_string($datetime,$present, $full = false)
             }
 
             
+            if(strpos($tweet_url,'https://twitter.com') !== false){
+
+                $json_title = $tweet['text'];
+                $pos = strpos($json_title,'… https://t.co');
+                $json_title = substr($json_title, 0,$pos);
+
+            }
 
             
 
             //$tweet_text=preg_replace('@(https?://([-\w\.]+)+(/([\w/_\.]*(\?\S+)?(#\S+)?)?)?)@', ' ', $tweet_text );
 
                                                     
-
             // filter out the retweets                      
 
             if(preg_match('/^RT/', $tweet_text) == 0)
@@ -308,15 +314,15 @@ function time_elapsed_string($datetime,$present, $full = false)
 
                 // output
 
-                if($json_title != NULL)
+                if($json_title != NULL and strlen($json_title)>strlen($tweet_text))
 
                 {
 
                     echo "<h4 class='margin-top-4px'>";
 
-                    echo "<p class=\"tweet\">$json_title &nbsp;</p>";
+                    echo "<p class=\"tweet\">$json_title &nbsp;";
 
-                    echo "<a href='{$tweet_url}'>...</a> ";
+                    echo "<a href='{$tweet_url}'>...</a> </p>";
 
                     echo "</h4>";
 
@@ -328,7 +334,7 @@ function time_elapsed_string($datetime,$present, $full = false)
 
                     echo "<h4 class='margin-top-4px'>";
 
-                    echo "<p class=\"tweet\">From tweet: $tweet_text</p>";
+                    echo "<p class=\"tweet\"><a href='{$tweet_url}'>$tweet_text</a></p>";
 
                     echo "</h4>";
 
@@ -352,10 +358,12 @@ function time_elapsed_string($datetime,$present, $full = false)
 
                 echo "<table class='ranktable' ><tr><td><span id='$tweetid' name='$tweetid'  title=\"Propaganda Score\">PScore:$pscore<script>drawChart($pscore,'$tweetid');</script></span><br>Propaganda</td>";
                 echo "<td align='center' style='padding: 5px 10px 5px 5px;'><a href='callAPI.php?tweetid=$tweetid'  title=\"QCRI Claim Rank\" onClick='MyWindow=window.open(\"claimrank.php?tweetid=$tweetid\",\"MyWindow\",width=300,height=300); return false;'><img src='iconClaim.png' alt='ClaimRank' width='80px'></a><br/><br/>Claim Rank</td>";
-                echo "<td  align='center' style='padding: 5px 10px 5px 5px;'><span id='$tweetid+1' name='$tweetid+1'  title=\"Factuality of reporting\">PScore:$pscore<script>drawFactBarChart($factscores[0],$factscores[1],$factscores[2],'$tweetid+1');</script></span><br>Factuality of Reporting</td>";
-                echo "<td align='center' style='padding: 5px 10px 5px 5px;'><span id='$tweetid+2' name='$tweetid+2'  title=\"Ideology: Left-Right Bias\">PScore:$pscore<script>drawBiasBarChart($biasscores[0],$biasscores[1],$biasscores[2],$biasscores[3],$biasscores[4],$biasscores[5],$biasscores[6],'$tweetid+2');</script></span><br>Ideology: Left-Right Bias</td>";                
+                echo "<td  align='center' style='padding: 5px 10px 5px 5px;'><span id='".$tweetid."f' name='".$tweetid."f'  title=\"Factuality of reporting\">&nbsp;<script>drawFactBarChart($factscores[0],$factscores[1],$factscores[2],'".$tweetid."f');</script></span><br>Factuality of Reporting</td>";
+                echo "<td align='center' style='padding: 5px 10px 5px 5px;'><span id='".$tweetid."b' name='".$tweetid."b'  title=\"Ideology: Left-Right Bias\">&nbsp;<script>drawBiasBarChart($biasscores[0],$biasscores[1],$biasscores[2],$biasscores[3],$biasscores[4],$biasscores[5],$biasscores[6],'".$tweetid."b');</script></span><br>Ideology: Left-Right Bias</td>";                
                 echo "</tr></table>";
                  
+
+                //echo "<div>Dump:".var_dump($tweet)."</div><br>";
 
                 echo "</div>"; //ended div_text
 
