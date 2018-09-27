@@ -1,2 +1,3 @@
 config_ara.txt
 config_eng.txt
+*.pyc
