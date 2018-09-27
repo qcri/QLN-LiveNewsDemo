@@ -17,12 +17,14 @@ import MySQLdb
 import json
 import argparse
 from newspaper import Article
+from proppy import Proppy
 
 
 # Connect to MySQL
 # Update Connection details
-db=MySQLdb.connect(host="localhost",database="reactapp",user="root",password='QCRI123!',unix_socket='/var/run/mysqld/mysqld.sock', charset = 'utf8')
+db=MySQLdb.connect(host="localhost",database="reactapp",user="root",password='QCRI123!',unix_socket='/Applications/XAMPP/xamppfiles/var/mysql/mysql.sock', charset = 'utf8')
 cursor=db.cursor()
+proppy = Proppy()
 
 
 
@@ -135,9 +137,16 @@ def getArticle(link):
     article1.parse()
     title = article1.title
     content = article1.text
-    propaganda_score = random.random()
+
     image = article1.top_image
     url = article1.url
+
+    #propaganda_score = random.random()
+    if content:
+        propaganda_score = proppy.predict(content)
+    else:
+        propaganda_score = 0.0
+
     return (title, image, propaganda_score,content)
 
 

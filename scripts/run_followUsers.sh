@@ -1,5 +1,5 @@
 #!/bin/sh
 
-python3 followUsers.py -l eng & python3 followUsers.py -l ara &
+PYTHONPATH=./proppyworker python3 followUsers.py -l eng & PYTHONPATH=./proppyworker python3 followUsers.py -l ara &
 
 

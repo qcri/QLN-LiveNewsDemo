@@ -1,0 +1,7 @@
+Lexicons for dramatic language styles created using Wiktionary Lists found here:
+
+superlatives: https://en.wiktionary.org/wiki/Category:English_adjective_superlative_forms
+comparatives: https://en.wiktionary.org/wiki/Category:English_adjective_comparative_forms
+modal adverbs: https://en.wiktionary.org/wiki/Category:English_modal_adverbs
+action (act-related) adverbs: https://en.wiktionary.org/wiki/Category:English_act-related_adverbs
+manner adverbs: https://en.wiktionary.org/wiki/Category:English_manner_adverbs
