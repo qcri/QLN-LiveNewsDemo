@@ -21,12 +21,15 @@
       <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
       <script type="text/javascript">
-
+            var google_charts_ready = false;
             google.charts.load("current", {packages:['corechart']});
             google.charts.load('current', {'packages':['gauge']});
-            google.charts.setOnLoadCallback(drawChart());
-            function drawChart(val, divid) {
+            google.charts.setOnLoadCallback(function() {google_charts_ready = true});
 
+            function drawChart(val, divid) {
+              if (google_charts_ready == false) {
+                return setTimeout(function() { drawChart(val, divid)}, 1000);
+              }
               var data = google.visualization.arrayToDataTable([
                 ['Label', 'Value'],
                 ['PScore', val*100],
@@ -43,8 +46,11 @@
               chart.draw(data, options);
           }
 
-          google.charts.setOnLoadCallback(drawFactBarChart());
+          // google.charts.setOnLoadCallback(drawFactBarChart);
           function drawFactBarChart(val1,val2,val3,divid) {
+              if (google_charts_ready == false) {
+                return setTimeout(function() { drawFactBarChart(val1,val2,val3,divid)}, 1000);
+              }
               var chartdata=[["Ideology", "Value", { role: "style" } ],['low', val1, '#461420'],['mixed', val2, '#584738'],['high', val3, '#859863']];
               var data = google.visualization.arrayToDataTable(chartdata);
               var view = new google.visualization.DataView(data);
@@ -66,8 +72,11 @@
               chart.draw(view, options);
           }
 
-          google.charts.setOnLoadCallback(drawBiasBarChart());
+          // google.charts.setOnLoadCallback(drawBiasBarChart);
           function drawBiasBarChart(val1,val2,val3,val4,val5,val6,val7,divid) {
+            if (google_charts_ready == false) {
+                return setTimeout(function() { drawBiasBarChart(val1,val2,val3,val4,val5,val6,val7,divid)}, 1000);
+            }
             var chartdata=[["Ideology", "Value", { role: "style" } ],['extreme-right', val1, '#461420'],['right', val2, '#584738'],['right-center', val3, '#859863'],['center', val4, '#F0CE86'],['left-center', val5, '#DD2D2C'],['left', val6, '#18845F'],['extreme-left', val7, '#72529D']];
               var data = google.visualization.arrayToDataTable(chartdata);
 
