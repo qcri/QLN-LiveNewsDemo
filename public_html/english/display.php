@@ -161,6 +161,8 @@
                                 $factlabels = explode(" ","low mixed high");
                                 $biasscores = explode(" ",$row["bias_predictions"]);
                                 $biaslabels = explode(" ", "extreme-right right right-center center left-center left extreme-left");
+                                $bias3scalescores = array(($biasscores[0]+$biasscores[1]+$biasscores[2]/2),($biasscores[2]/2+$biasscores[3]+$biasscores[4]/2),($biasscores[4/2]+$biasscores[5]+$biasscores[6]));
+                                $bias3scalelabels = explode(" ", "right center left");
                                 $factscores_chart_data="";
                                 for ($i = 0; $i < count($factscores); $i++)
                                     $factscores_chart_data .= "{x: '".$factlabels[$i]."', y: ".$factscores[$i]."},";
@@ -168,6 +170,9 @@
                                 $biasscores_chart_data="";
                                 for ($i = 0; $i < count($biasscores); $i++)
                                     $biasscores_chart_data .= "{x: '".$biaslabels[$i]."', y: ".$biasscores[$i]."},";
+                                $bias3scalescores_chart_data="";
+                                for ($i = 0; $i < count($bias3scalescores); $i++)
+                                    $bias3scalescores_chart_data .= "{x: '".$bias3scalelabels[$i]."', y: ".$bias3scalescores[$i]."},";
                                 #$biasscores_chart_data = "[".$biasscores_chart_data."]";
                                 #echo " Fact Score: ".$factscores_chart_data."<br/>";
                                 #echo " Bias Score: ".$biasscores_chart_data."<br/>";
@@ -212,6 +217,12 @@
                             <td><?php echo $row["bias"]?> <div style='position:relative;width:500px;height:250px;' id='biaschart'></div>
                             </td>
                             </tr>
+                            <tr>
+                            <td>Bias:
+                            </td>
+                            <td><?php echo $row["bias"]?> <div style='position:relative;width:500px;height:180px;' id='bias3scalechart'></div>
+                            </td>
+                            </tr>                            
                         </table>
                     </div>
                     <h3 class="sm_heading">Social Media Profiles</h3>
@@ -367,7 +378,7 @@
 </script>
 <script>
    //var $arrColors = ['#34495E', '#26B99A',  '#666', '#3498DB',"#008080", "#800080", "#000800"];
-    var $arrColors = ['#461420', '#584738', '#859863', '#F0CE86', '#DD2D2C', '#18845F', '#72529D'];
+    var $arrColors = ['#461420', '#584738', '#859863', '#F0CE86', '#DD2D2C', '#18845F', '#72529D', '#FF0000','#FF99FF','#0000FF'];
 
     var FactBar= Morris.Bar ({  
         element: 'factchart',
@@ -409,8 +420,29 @@
         resize:true
     });
 
+var Bias3ScaleBar= Morris.Bar ({        
+        element: 'bias3scalechart',
+        data:[<?php echo $bias3scalescores_chart_data ?>],
+        xkey: 'x',
+        ykeys:['y'],
+        ymax:1,
+        labels:['y'],
+        barColors:  function (row, series, type) {
+        return $arrColors[row.x+7];
+    },//["#B21516", "#999999", "#1f7a1f", "#000080", "#008080", "#800080", "#000800"],
+        hideHover:'auto',
+        xLabelMargin: 10,
+        horizontal:true,        
+        stacked: false,
+        gridTextColor: '#000',
+        gridTextSize: 15,
+        resize:true
+    });
+
+
     FactBar.redraw();
     BiasBar.redraw();
+    Bias3ScaleBar.redraw();
 
 $('a[data-toggle="tab"]').on('shown.bs.tab', function(e) {
   var target = $(e.target).attr("href") // activated tab

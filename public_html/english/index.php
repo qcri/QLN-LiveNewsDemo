@@ -46,6 +46,46 @@
               chart.draw(data, options);
           }
 
+          function drawCerntalityChart(val1,val2,val3,val4,val5,val6,val7,divid) {
+              if (google_charts_ready == false) {
+                return setTimeout(function() { drawCerntalityChart(val1,val2,val3,val4,val5,val6,val7,divid)}, 1000);
+              }
+              var data = google.visualization.arrayToDataTable([
+                ['Label', 'Value'],
+                ['PScore', (val3/2+val4+val5/2)*100],
+              ]);
+
+              var options = {
+                width: 210, height: 80,
+                redFrom: 80, redTo: 100,
+                yellowFrom:50, yellowTo: 80,
+                greenFrom:0, greenTo:50,
+                minorTicks: 5
+              };
+              var chart = new google.visualization.Gauge(document.getElementById(divid));
+              chart.draw(data, options);
+          }
+
+          function drawHyperPartisanshipChart(val1,val2,val3,val4,val5,val6,val7,divid) {
+              if (google_charts_ready == false) {
+                return setTimeout(function() { drawHyperPartisanshipChart(val1,val2,val3,val4,val5,val6,val7,divid)}, 1000);
+              }
+              var data = google.visualization.arrayToDataTable([
+                ['Label', 'Value'],
+                ['PScore', (val1+val2+val6+val7)*100],
+              ]);
+
+              var options = {
+                width: 210, height: 80,
+                redFrom: 80, redTo: 100,
+                yellowFrom:50, yellowTo: 80,
+                greenFrom:0, greenTo:50,
+                minorTicks: 5
+              };
+              var chart = new google.visualization.Gauge(document.getElementById(divid));
+              chart.draw(data, options);
+          }
+
           // google.charts.setOnLoadCallback(drawFactBarChart);
           function drawFactBarChart(val1,val2,val3,divid) {
               if (google_charts_ready == false) {
@@ -77,7 +117,7 @@
             if (google_charts_ready == false) {
                 return setTimeout(function() { drawBiasBarChart(val1,val2,val3,val4,val5,val6,val7,divid)}, 1000);
             }
-            var chartdata=[["Ideology", "Value", { role: "style" } ],['extreme-right', val1, '#461420'],['right', val2, '#584738'],['right-center', val3, '#859863'],['center', val4, '#F0CE86'],['left-center', val5, '#DD2D2C'],['left', val6, '#18845F'],['extreme-left', val7, '#72529D']];
+            var chartdata=[["Ideology", "Value", { role: "style" } ],['extreme-left', val7, '#72529D'],['left', val6, '#18845F'], ['left-center', val5, '#DD2D2C'],['center', val4, '#F0CE86'],['right-center', val3, '#859863'],['right', val2, '#584738'],['extreme-right', val1, '#461420']];
               var data = google.visualization.arrayToDataTable(chartdata);
 
               var view = new google.visualization.DataView(data);
@@ -90,7 +130,7 @@
 
               var options = {
                 //title: "Density of Precious Metals, in g/cm^3",
-                width: 250,
+                width: 280,
                 height: 100,
                 bar: {groupWidth: "95%"},
                 legend: { position: "none" },

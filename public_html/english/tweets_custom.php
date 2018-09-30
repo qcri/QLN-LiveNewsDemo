@@ -187,7 +187,7 @@ function time_elapsed_string($datetime,$present, $full = false)
 
     include 'dbconnection.php';
 
-    $sql="SELECT * FROM tweets_eng, eng_source_name, news_english WHERE eng_source_name.source_user_name = tweets_eng.screen_name and eng_source_name.source_user_id=news_english.user_id ORDER BY tweets_eng.date DESC LIMIT 50";
+    $sql="SELECT * FROM tweets_eng, eng_source_name, news_english WHERE eng_source_name.source_user_name = tweets_eng.screen_name and eng_source_name.source_user_id=news_english.user_id  and length(tweets_eng.article)>1000 ORDER BY tweets_eng.date DESC LIMIT 50";
 
     $result = mysqli_query($conn,$sql);
 
@@ -356,10 +356,14 @@ function time_elapsed_string($datetime,$present, $full = false)
 
                 echo "<p class='tweet_time'>$t_time &nbsp; ($tweet_time)</p>";
 
-                echo "<table class='ranktable' ><tr><td><span id='$tweetid' name='$tweetid'  title=\"Propaganda Score\">PScore:$pscore<script>drawChart($pscore,'$tweetid');</script></span><br>Propaganda</td>";
+                echo "<table class='ranktable' border='0px'><tr>";
+                echo "<td width='140px' align='center' style='padding: 5px 10px 5px 5px;'><span id='$tweetid' name='$tweetid'  title=\"Propaganda Score\">PScore:$pscore<script>drawChart($pscore,'$tweetid');</script></span><br>Propaganda</td>";
+                echo "<td width='140px' align='center' style='padding: 5px 10px 5px 5px;'><span id='".$tweetid."c' name='".$tweetid."c'  title=\"Cerntrality\">&nbsp;<script>drawCerntalityChart($biasscores[0],$biasscores[1],$biasscores[2],$biasscores[3],$biasscores[4],$biasscores[5],$biasscores[6],'".$tweetid."c');</script></span><br>Cerntrality</td>";
+                echo "<td  width='140px' align='center' style='padding: 5px 10px 5px 5px;'><span id='".$tweetid."p' name='".$tweetid."p'  title=\"Hyper-Partisanship\">&nbsp;<script>drawHyperPartisanshipChart($biasscores[0],$biasscores[1],$biasscores[2],$biasscores[3],$biasscores[4],$biasscores[5],$biasscores[6],'".$tweetid."p');</script></span><br>Hyper-Partisanship</td>";
+
                 echo "<td align='center' style='padding: 5px 10px 5px 5px;'><a href='callAPI.php?tweetid=$tweetid'  title=\"QCRI Claim Rank\" onClick='MyWindow=window.open(\"claimrank.php?tweetid=$tweetid\",\"MyWindow\",width=300,height=300); return false;'><img src='iconClaim.png' alt='ClaimRank' width='80px'></a><br/><br/>Claim Rank</td>";
                 echo "<td  align='center' style='padding: 5px 10px 5px 5px;'><span id='".$tweetid."f' name='".$tweetid."f'  title=\"Factuality of reporting\">&nbsp;<script>drawFactBarChart($factscores[0],$factscores[1],$factscores[2],'".$tweetid."f');</script></span><br>Factuality of Reporting</td>";
-                echo "<td align='center' style='padding: 5px 10px 5px 5px;'><span id='".$tweetid."b' name='".$tweetid."b'  title=\"Ideology: Right-Left Bias\">&nbsp;<script>drawBiasBarChart($biasscores[0],$biasscores[1],$biasscores[2],$biasscores[3],$biasscores[4],$biasscores[5],$biasscores[6],'".$tweetid."b');</script></span><br>Ideology: Right-Left Bias</td>";                
+                echo "<td align='center' style='padding: 5px 10px 5px 5px;'><span id='".$tweetid."b' name='".$tweetid."b'  title=\"Ideology: Left-Right Bias\">&nbsp;<script>drawBiasBarChart($biasscores[0],$biasscores[1],$biasscores[2],$biasscores[3],$biasscores[4],$biasscores[5],$biasscores[6],'".$tweetid."b');</script></span><br>Ideology: Left-Right Bias</td>";                
                 echo "</tr></table>";
                  
 
