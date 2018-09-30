@@ -23,7 +23,54 @@
     .morris-hover{position:absolute;z-index:1000;}.morris-hover.morris-default-style{border-radius:10px;padding:6px;color:#666;background:rgba(255, 255, 255, 0.8);border:solid 2px rgba(230, 230, 230, 0.8);font-family:sans-serif;font-size:12px;text-align:center;}.morris-hover.morris-default-style .morris-hover-row-label{font-weight:bold;margin:0.25em 0;}
     .morris-hover.morris-default-style .morris-hover-point{white-space:nowrap;margin:0.1em 0;}
     </style>
+      <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
+      <script type="text/javascript">
+            var google_charts_ready = false;
+            google.charts.load('current', {'packages':['gauge']});
+            google.charts.setOnLoadCallback(function() {google_charts_ready = true});
+
+          function drawCerntalityChart(val1,val2,val3,val4,val5,val6,val7,divid) {
+              if (google_charts_ready == false) {
+                return setTimeout(function() { drawCerntalityChart(val1,val2,val3,val4,val5,val6,val7,divid)}, 1000);
+              }
+              var data = google.visualization.arrayToDataTable([
+                ['Label', 'Value'],
+                ['PScore', (val3/2+val4+val5/2)*100],
+              ]);
+
+              var options = {
+                width: 280, height: 110,
+                redFrom: 80, redTo: 100,
+                yellowFrom:50, yellowTo: 80,
+                greenFrom:0, greenTo:50,
+                minorTicks: 5
+              };
+              var chart = new google.visualization.Gauge(document.getElementById(divid));
+              chart.draw(data, options);
+          }
+
+          function drawHyperPartisanshipChart(val1,val2,val3,val4,val5,val6,val7,divid) {
+              if (google_charts_ready == false) {
+                return setTimeout(function() { drawHyperPartisanshipChart(val1,val2,val3,val4,val5,val6,val7,divid)}, 1000);
+              }
+              var data = google.visualization.arrayToDataTable([
+                ['Label', 'Value'],
+                ['PScore', (val1+val2+val6+val7)*100],
+              ]);
+
+              var options = {
+                width: 280, height: 110,
+                redFrom: 80, redTo: 100,
+                yellowFrom:50, yellowTo: 80,
+                greenFrom:0, greenTo:50,
+                minorTicks: 5
+              };
+              var chart = new google.visualization.Gauge(document.getElementById(divid));
+              chart.draw(data, options);
+          }
+
+      </script>
     <title>News Source</title>
     <style>
     .msize {
@@ -222,7 +269,20 @@
                             </td>
                             <td><?php echo $row["bias"]?> <div style='position:relative;width:500px;height:180px;' id='bias3scalechart'></div>
                             </td>
-                            </tr>                            
+                            </tr> 
+                            <tr style="border-bottom: thin ridge;">
+                            <td>Political Stance: 
+                            </td>
+                            <td >
+                            <?php 
+                            echo "<br/><table class='ranktable' border='0px' align='center'><tr>";
+                            echo "<td width='180px' align='center' style='padding: 5px 10px 5px 5px;'><span id='CerntalityChart' name='CerntalityChart'  title=\"Centrality\">&nbsp;<script>drawCerntalityChart($biasscores[0],$biasscores[1],$biasscores[2],$biasscores[3],$biasscores[4],$biasscores[5],$biasscores[6],'CerntalityChart');</script></span><br>Centrality</td>";
+                            echo "<td  width='180px' align='center' style='padding: 5px 10px 5px 5px;'><span id='PartisanshipChart' name='PartisanshipChart'  title=\"Hyper-Partisanship\">&nbsp;<script>drawHyperPartisanshipChart($biasscores[0],$biasscores[1],$biasscores[2],$biasscores[3],$biasscores[4],$biasscores[5],$biasscores[6],'PartisanshipChart');</script></span><br>Hyper-Partisanship</td>";
+                            echo "</tr></table>";
+                            ?>
+                        </td>
+                            </tr> 
+
                         </table>
                     </div>
                     <h3 class="sm_heading">Social Media Profiles</h3>
