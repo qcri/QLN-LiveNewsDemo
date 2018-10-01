@@ -56,7 +56,7 @@
               }
               var data = google.visualization.arrayToDataTable([
                 ['Label', 'Value'],
-                ['PScore', (val1+val2+val6+val7)*100],
+                ['PScore', (val1+val7)*100],
               ]);
 
               var options = {
@@ -208,7 +208,7 @@
                                 $factlabels = explode(" ","low mixed high");
                                 $biasscores = explode(" ",$row["bias_predictions"]);
                                 $biaslabels = explode(" ", "extreme-right right right-center center left-center left extreme-left");
-                                $bias3scalescores = array(($biasscores[0]+$biasscores[1]+$biasscores[2]/2),($biasscores[2]/2+$biasscores[3]+$biasscores[4]/2),($biasscores[4/2]+$biasscores[5]+$biasscores[6]));
+                                $bias3scalescores = array(($biasscores[0]+$biasscores[1]+$biasscores[2]/2),($biasscores[2]/2+$biasscores[3]+$biasscores[4]/2),($biasscores[4]/2+$biasscores[5]+$biasscores[6]));
                                 $bias3scalelabels = explode(" ", "right center left");
                                 $factscores_chart_data="";
                                 for ($i = 0; $i < count($factscores); $i++)

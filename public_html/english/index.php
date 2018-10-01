@@ -72,7 +72,7 @@
               }
               var data = google.visualization.arrayToDataTable([
                 ['Label', 'Value'],
-                ['PScore', (val1+val2+val6+val7)*100],
+                ['PScore', (val1+val7)*100],
               ]);
 
               var options = {
