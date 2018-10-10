@@ -204,6 +204,9 @@ function time_elapsed_string($datetime,$present, $full = false)
             $json_title = $row['title'];
             $json_image = $row['image'];
             $pscore = $row['propaganda_score']; 
+            $namedEntities = $row['namedEntities'];
+            $translation      = $row['translation'];    
+            $lemmas      = $row['lemmas'];    
 
             $arrColors = ['#461420', '#584738', '#859863', '#F0CE86', '#DD2D2C', '#18845F', '#72529D', '#72529D'];
             $factscores = explode(" ", $row["fact_predictions"]);            
@@ -355,6 +358,10 @@ function time_elapsed_string($datetime,$present, $full = false)
                 $t_time= time_elapsed_string($tweet_time,$now);
 
                 echo "<p class='tweet_time'>$t_time &nbsp; ($tweet_time)</p>";
+
+                //echo nl2br("\n namedEntities: $namedEntities");
+                //echo nl2br("\n translation: $translation");
+                //echo nl2br("\n lemmas: $lemmas");
 
                 echo "<table class='ranktable' border='0px'><tr>";
                 echo "<td width='140px' align='center' style='padding: 5px 10px 5px 5px;'><span id='$tweetid' name='$tweetid'  title=\"Propaganda Score\">PScore:$pscore<script>drawChart($pscore,'$tweetid');</script></span><br>Propaganda</td>";

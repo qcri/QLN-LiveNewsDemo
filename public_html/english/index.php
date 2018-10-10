@@ -657,7 +657,7 @@
                         else {
                           $truncate_name= mysqli_query($conn,"TRUNCATE TABLE eng_source_name");
                           $truncate_id= mysqli_query($conn,"TRUNCATE TABLE my_sources_en");
-                          $sql_f = "SELECT * FROM news_english LIMIT 10";
+                          $sql_f = "SELECT * FROM news_english LIMIT 100";
                           $result_f = mysqli_query($conn,$sql_f);
                           $total_count=mysqli_query($conn,"SELECT * FROM news_english")->num_rows;
                           $selected_count=$result_f->num_rows;                           

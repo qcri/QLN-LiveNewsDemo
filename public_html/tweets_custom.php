@@ -172,7 +172,10 @@ function time_elapsed_string($datetime,$present, $full = false)
             $json = $row['tweet'];
             $json_title = $row['title'];
             $json_image = $row['image'];
-            $pscore = $row['propaganda_score'];    
+            $pscore = $row['propaganda_score'];
+            $namedEntities = $row['namedEntities'];
+            $translation      = $row['translation'];    
+            $lemmas      = $row['lemmas'];    
 
             // decode json format tweets
 
@@ -305,6 +308,9 @@ function time_elapsed_string($datetime,$present, $full = false)
                 echo "<p class='tweet_time'>$t_time &nbsp; ($tweet_time)</p>";
 
                 echo nl2br("\n PScore: $pscore");
+                echo nl2br("\n namedEntities: $namedEntities");
+                echo nl2br("\n translation: $translation");
+                echo nl2br("\n lemmas: $lemmas");
 
                 echo "</div>"; //ended div_text
 
